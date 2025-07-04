@@ -1,0 +1,27 @@
+{
+  "canisters": {
+    "hash-password-backend": {
+      "candid": "src/hash-password-backend/hash-password-backend.did",
+      "package": "hash-password-backend",
+      "type": "rust"
+    },
+    "hash-password-frontend": {
+      "dependencies": [
+        "hash-password-backend"
+      ],
+      "source": [
+        "src/hash-password-frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "hash-password-frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
