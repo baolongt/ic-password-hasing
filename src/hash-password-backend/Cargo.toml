@@ -9,6 +9,12 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
+argon2 = "0.5.3"
 candid = "0.10"
-ic-cdk = "0.17"
-ic-cdk-timers = "0.11" # Feel free to remove this dependency if you don't need timers
+ic-cdk = "0.18.5"
+ic-cdk-timers = "0.12.2" # Feel free to remove this dependency if you don't need timers
+hex = "0.4"
+bcrypt = "0.15.1"
+getrandom = { version = "0.2", features = ["custom"] }
+rand = "0.8"
+rand_chacha = "0.9"
