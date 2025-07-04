@@ -18,3 +18,4 @@ bcrypt = "0.15.1"
 getrandom = { version = "0.2", features = ["custom"] }
 rand = "0.8"
 rand_chacha = "0.9"
+canbench-rs = { version = "0.2.1", optional = true }

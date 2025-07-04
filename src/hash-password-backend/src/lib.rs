@@ -138,7 +138,42 @@ fn get_password_hash_bcrypt() -> Option<String> {
     BCRYPT_HASH.with(|cell| cell.borrow().clone())
 }
 
+#[cfg(feature = "canbench-rs")]
+mod benches {
+    use super::*;
+    use canbench_rs::bench;
+    use std::hint::black_box;
 
+    const TEST_PASSWORD: &str = "benchmark_password";
+
+    // Benchmark Argon2 hashing
+    #[bench]
+    fn argon2_hash() {
+        black_box(set_password(TEST_PASSWORD.to_string()));
+    }
+
+    // Benchmark Argon2 verification
+    #[bench]
+    fn argon2_verify() {
+        // Ensure we have a hash stored
+        let _ = set_password(TEST_PASSWORD.to_string());
+        black_box(check_password(TEST_PASSWORD.to_string()));
+    }
+
+    // Benchmark bcrypt hashing
+    #[bench]
+    fn bcrypt_hash() {
+        black_box(set_password_bcrypt(TEST_PASSWORD.to_string()));
+    }
+
+    // Benchmark bcrypt verification
+    #[bench]
+    fn bcrypt_verify() {
+        // Ensure we have a bcrypt hash stored
+        let _ = set_password_bcrypt(TEST_PASSWORD.to_string());
+        black_box(check_password_bcrypt(TEST_PASSWORD.to_string()));
+    }
+}
 
 // Export the candid interface so the .did file can be generated automatically.
 ic_cdk::export_candid!();
